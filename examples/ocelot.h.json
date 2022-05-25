@@ -1,0 +1,542 @@
+[{
+		"name":	"ocelot_compound_type",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	false,
+		"type":	{
+			"name":	"ocelot_compound_type",
+			"type_class":	"union",
+			"record_fields":	[{
+					"name":	"pointer",
+					"type":	{
+						"type_class":	"struct",
+						"record_fields":	[{
+								"name":	"indirection",
+								"type":	{
+									"type_class":	"int"
+								}
+							}, {
+								"name":	"base_type",
+								"type":	{
+									"type_class":	"pointer",
+									"indirection":	1,
+									"base_type":	{
+										"name":	"ocelot_type",
+										"type_class":	"struct"
+									}
+								}
+							}]
+					}
+				}, {
+					"name":	"array",
+					"type":	{
+						"type_class":	"struct",
+						"record_fields":	[{
+								"name":	"size",
+								"type":	{
+									"type_class":	"int"
+								}
+							}, {
+								"name":	"base_type",
+								"type":	{
+									"type_class":	"pointer",
+									"indirection":	1,
+									"base_type":	{
+										"name":	"ocelot_type",
+										"type_class":	"struct"
+									}
+								}
+							}]
+					}
+				}, {
+					"name":	"function",
+					"type":	{
+						"type_class":	"struct",
+						"record_fields":	[{
+								"name":	"parameters",
+								"type":	{
+									"type_class":	"pointer",
+									"indirection":	2,
+									"base_type":	{
+										"name":	"ocelot_type",
+										"type_class":	"struct"
+									}
+								}
+							}, {
+								"name":	"return_type",
+								"type":	{
+									"type_class":	"pointer",
+									"indirection":	1,
+									"base_type":	{
+										"name":	"ocelot_type",
+										"type_class":	"struct"
+									}
+								}
+							}, {
+								"name":	"variadic",
+								"type":	{
+									"type_class":	"int"
+								}
+							}]
+					}
+				}, {
+					"name":	"record_fields",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	2,
+						"base_type":	{
+							"name":	"ocelot_record_field",
+							"type_class":	"struct"
+						}
+					}
+				}, {
+					"name":	"enum_fields",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	2,
+						"base_type":	{
+							"name":	"ocelot_enum_field",
+							"type_class":	"struct"
+						}
+					}
+				}]
+		}
+	}, {
+		"name":	"ocelot_enum_field",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	false,
+		"type":	{
+			"name":	"ocelot_enum_field",
+			"type_class":	"struct",
+			"record_fields":	[{
+					"name":	"name",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	1,
+						"base_type":	{
+							"type_class":	"char"
+						}
+					}
+				}, {
+					"name":	"value",
+					"type":	{
+						"type_class":	"long long"
+					}
+				}]
+		}
+	}, {
+		"name":	"ocelot_free_include_dirs",
+		"symbol_class":	"function",
+		"linkage":	"public",
+		"type":	{
+			"type_class":	"function",
+			"parameters":	[{
+					"type_class":	"pointer",
+					"indirection":	2,
+					"base_type":	{
+						"type_class":	"char"
+					}
+				}],
+			"return_type":	{
+				"type_class":	"void"
+			},
+			"variadic":	false
+		}
+	}, {
+		"name":	"ocelot_json_parse",
+		"symbol_class":	"function",
+		"linkage":	"public",
+		"type":	{
+			"type_class":	"function",
+			"parameters":	[{
+					"type_class":	"pointer",
+					"indirection":	1,
+					"base_type":	{
+						"type_class":	"char"
+					}
+				}],
+			"return_type":	{
+				"type_class":	"pointer",
+				"indirection":	1,
+				"base_type":	{
+					"name":	"ocelot_symbols",
+					"type_class":	"struct"
+				}
+			},
+			"variadic":	false
+		}
+	}, {
+		"name":	"ocelot_json_serialize",
+		"symbol_class":	"function",
+		"linkage":	"public",
+		"type":	{
+			"type_class":	"function",
+			"parameters":	[{
+					"type_class":	"pointer",
+					"indirection":	1,
+					"base_type":	{
+						"name":	"ocelot_symbols",
+						"type_class":	"struct"
+					}
+				}],
+			"return_type":	{
+				"type_class":	"pointer",
+				"indirection":	1,
+				"base_type":	{
+					"type_class":	"char"
+				}
+			},
+			"variadic":	false
+		}
+	}, {
+		"name":	"ocelot_parse",
+		"symbol_class":	"function",
+		"linkage":	"public",
+		"type":	{
+			"type_class":	"function",
+			"parameters":	[{
+					"type_class":	"pointer",
+					"indirection":	1,
+					"base_type":	{
+						"type_class":	"char"
+					}
+				}, {
+					"type_class":	"pointer",
+					"indirection":	2,
+					"base_type":	{
+						"type_class":	"char"
+					}
+				}],
+			"return_type":	{
+				"type_class":	"pointer",
+				"indirection":	1,
+				"base_type":	{
+					"name":	"ocelot_symbols",
+					"type_class":	"struct"
+				}
+			},
+			"variadic":	false
+		}
+	}, {
+		"name":	"ocelot_record_field",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	false,
+		"type":	{
+			"name":	"ocelot_record_field",
+			"type_class":	"struct",
+			"record_fields":	[{
+					"name":	"name",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	1,
+						"base_type":	{
+							"type_class":	"char"
+						}
+					}
+				}, {
+					"name":	"type",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	1,
+						"base_type":	{
+							"name":	"ocelot_type",
+							"type_class":	"struct"
+						}
+					}
+				}]
+		}
+	}, {
+		"name":	"ocelot_split_include_dirs",
+		"symbol_class":	"function",
+		"linkage":	"public",
+		"type":	{
+			"type_class":	"function",
+			"parameters":	[{
+					"type_class":	"pointer",
+					"indirection":	1,
+					"base_type":	{
+						"type_class":	"char"
+					}
+				}],
+			"return_type":	{
+				"type_class":	"pointer",
+				"indirection":	2,
+				"base_type":	{
+					"type_class":	"char"
+				}
+			},
+			"variadic":	false
+		}
+	}, {
+		"name":	"ocelot_symbol",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	false,
+		"type":	{
+			"name":	"ocelot_symbol",
+			"type_class":	"struct",
+			"record_fields":	[{
+					"name":	"name",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	1,
+						"base_type":	{
+							"type_class":	"char"
+						}
+					}
+				}, {
+					"name":	"symbol_class",
+					"type":	{
+						"name":	"ocelot_symbol_class",
+						"type_class":	"enum"
+					}
+				}, {
+					"name":	"linkage",
+					"type":	{
+						"name":	"ocelot_symbol_linkage",
+						"type_class":	"enum"
+					}
+				}, {
+					"name":	"elaborated",
+					"type":	{
+						"type_class":	"int"
+					}
+				}, {
+					"name":	"type",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	1,
+						"base_type":	{
+							"name":	"ocelot_type",
+							"type_class":	"struct"
+						}
+					}
+				}]
+		}
+	}, {
+		"name":	"ocelot_symbol_class",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	false,
+		"type":	{
+			"name":	"ocelot_symbol_class",
+			"type_class":	"enum",
+			"enum_fields":	[{
+					"name":	"OC_SYMBOL_FUNCTION",
+					"value":	0
+				}, {
+					"name":	"OC_SYMBOL_TYPE",
+					"value":	1
+				}, {
+					"name":	"OC_SYMBOL_VARIABLE",
+					"value":	2
+				}]
+		}
+	}, {
+		"name":	"ocelot_symbol_linkage",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	false,
+		"type":	{
+			"name":	"ocelot_symbol_linkage",
+			"type_class":	"enum",
+			"enum_fields":	[{
+					"name":	"OC_SYMBOL_PRIVATE",
+					"value":	0
+				}, {
+					"name":	"OC_SYMBOL_PUBLIC",
+					"value":	1
+				}, {
+					"name":	"OC_SYMBOL_EXTERN",
+					"value":	2
+				}]
+		}
+	}, {
+		"name":	"ocelot_symbols",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	false,
+		"type":	{
+			"name":	"ocelot_symbols",
+			"type_class":	"struct"
+		}
+	}, {
+		"name":	"ocelot_symbols_delete",
+		"symbol_class":	"function",
+		"linkage":	"public",
+		"type":	{
+			"type_class":	"function",
+			"parameters":	[{
+					"type_class":	"pointer",
+					"indirection":	1,
+					"base_type":	{
+						"name":	"ocelot_symbols",
+						"type_class":	"struct"
+					}
+				}],
+			"return_type":	{
+				"type_class":	"void"
+			},
+			"variadic":	false
+		}
+	}, {
+		"name":	"ocelot_symbols_get",
+		"symbol_class":	"function",
+		"linkage":	"public",
+		"type":	{
+			"type_class":	"function",
+			"parameters":	[{
+					"type_class":	"pointer",
+					"indirection":	1,
+					"base_type":	{
+						"name":	"ocelot_symbols",
+						"type_class":	"struct"
+					}
+				}, {
+					"type_class":	"pointer",
+					"indirection":	1,
+					"base_type":	{
+						"type_class":	"char"
+					}
+				}],
+			"return_type":	{
+				"type_class":	"pointer",
+				"indirection":	1,
+				"base_type":	{
+					"name":	"ocelot_symbol",
+					"type_class":	"struct"
+				}
+			},
+			"variadic":	false
+		}
+	}, {
+		"name":	"ocelot_symbols_get_all",
+		"symbol_class":	"function",
+		"linkage":	"public",
+		"type":	{
+			"type_class":	"function",
+			"parameters":	[{
+					"type_class":	"pointer",
+					"indirection":	1,
+					"base_type":	{
+						"name":	"ocelot_symbols",
+						"type_class":	"struct"
+					}
+				}],
+			"return_type":	{
+				"type_class":	"pointer",
+				"indirection":	2,
+				"base_type":	{
+					"name":	"ocelot_symbol",
+					"type_class":	"struct"
+				}
+			},
+			"variadic":	false
+		}
+	}, {
+		"name":	"ocelot_type",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	false,
+		"type":	{
+			"name":	"ocelot_type",
+			"type_class":	"struct",
+			"record_fields":	[{
+					"name":	"name",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	1,
+						"base_type":	{
+							"type_class":	"char"
+						}
+					}
+				}, {
+					"name":	"type_class",
+					"type":	{
+						"name":	"ocelot_type_class",
+						"type_class":	"enum"
+					}
+				}, {
+					"name":	"compound",
+					"type":	{
+						"name":	"ocelot_compound_type",
+						"type_class":	"union"
+					}
+				}]
+		}
+	}, {
+		"name":	"ocelot_type_class",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	false,
+		"type":	{
+			"name":	"ocelot_type_class",
+			"type_class":	"enum",
+			"enum_fields":	[{
+					"name":	"OC_TYPE_VOID",
+					"value":	0
+				}, {
+					"name":	"OC_TYPE_POINTER",
+					"value":	1
+				}, {
+					"name":	"OC_TYPE_ARRAY",
+					"value":	2
+				}, {
+					"name":	"OC_TYPE_CHAR",
+					"value":	3
+				}, {
+					"name":	"OC_TYPE_UCHAR",
+					"value":	4
+				}, {
+					"name":	"OC_TYPE_SHORT",
+					"value":	5
+				}, {
+					"name":	"OC_TYPE_USHORT",
+					"value":	6
+				}, {
+					"name":	"OC_TYPE_INT",
+					"value":	7
+				}, {
+					"name":	"OC_TYPE_UINT",
+					"value":	8
+				}, {
+					"name":	"OC_TYPE_LONG",
+					"value":	9
+				}, {
+					"name":	"OC_TYPE_ULONG",
+					"value":	10
+				}, {
+					"name":	"OC_TYPE_LLONG",
+					"value":	11
+				}, {
+					"name":	"OC_TYPE_ULLONG",
+					"value":	12
+				}, {
+					"name":	"OC_TYPE_FLOAT",
+					"value":	13
+				}, {
+					"name":	"OC_TYPE_DOUBLE",
+					"value":	14
+				}, {
+					"name":	"OC_TYPE_LDOUBLE",
+					"value":	15
+				}, {
+					"name":	"OC_TYPE_BOOL",
+					"value":	16
+				}, {
+					"name":	"OC_TYPE_FUNCTION",
+					"value":	17
+				}, {
+					"name":	"OC_TYPE_STRUCT",
+					"value":	18
+				}, {
+					"name":	"OC_TYPE_UNION",
+					"value":	19
+				}, {
+					"name":	"OC_TYPE_ENUM",
+					"value":	20
+				}]
+		}
+	}]
