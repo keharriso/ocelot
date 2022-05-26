@@ -29,8 +29,8 @@ Wouldn't it be nice to be able to just "include" C header files in other languag
 int main(void)
 {
 	ocelot_symbols *symbols = ocelot_parse("header.h", 0);
-	const ocelot_symbol **all_symbols = ocelot_symbols_get_all(symbols);
-	const ocelot_symbol **itr;
+	ocelot_symbol **all_symbols = ocelot_symbols_get_all(symbols);
+	ocelot_symbol **itr;
 	for (itr = all_symbols; *itr; itr++)
 	{
 		printf("symbol: `%s`\n", (*itr)->name);
