@@ -67,17 +67,17 @@ typedef struct
 
 typedef union
 { /* Extra information about a compound type */
-	struct
+	struct ocelot_pointer_type
 	{ /* Pointer information */
 		int indirection;        /* The level of indirection (number of *'s) */
 		ocelot_type *base_type; /* The base type */
 	} pointer;
-	struct
+	struct ocelot_array_type
 	{ /* Constant array information */
 		int size;               /* The constant size of the array */
 		ocelot_type *base_type; /* The base type */
 	} array;
-	struct
+	struct ocelot_function_type
 	{ /* Function information */
 		ocelot_type **parameters; /* NULL-terminated array of parameter types */
 		ocelot_type *return_type; /* The function return type */

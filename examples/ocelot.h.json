@@ -1,4 +1,29 @@
 [{
+		"name":	"ocelot_array_type",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	true,
+		"type":	{
+			"name":	"ocelot_array_type",
+			"type_class":	"struct",
+			"record_fields":	[{
+					"name":	"size",
+					"type":	{
+						"type_class":	"int"
+					}
+				}, {
+					"name":	"base_type",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	1,
+						"base_type":	{
+							"name":	"ocelot_type",
+							"type_class":	"struct"
+						}
+					}
+				}]
+		}
+	}, {
 		"name":	"ocelot_compound_type",
 		"symbol_class":	"type",
 		"linkage":	"private",
@@ -9,75 +34,20 @@
 			"record_fields":	[{
 					"name":	"pointer",
 					"type":	{
-						"type_class":	"struct",
-						"record_fields":	[{
-								"name":	"indirection",
-								"type":	{
-									"type_class":	"int"
-								}
-							}, {
-								"name":	"base_type",
-								"type":	{
-									"type_class":	"pointer",
-									"indirection":	1,
-									"base_type":	{
-										"name":	"ocelot_type",
-										"type_class":	"struct"
-									}
-								}
-							}]
+						"name":	"ocelot_pointer_type",
+						"type_class":	"struct"
 					}
 				}, {
 					"name":	"array",
 					"type":	{
-						"type_class":	"struct",
-						"record_fields":	[{
-								"name":	"size",
-								"type":	{
-									"type_class":	"int"
-								}
-							}, {
-								"name":	"base_type",
-								"type":	{
-									"type_class":	"pointer",
-									"indirection":	1,
-									"base_type":	{
-										"name":	"ocelot_type",
-										"type_class":	"struct"
-									}
-								}
-							}]
+						"name":	"ocelot_array_type",
+						"type_class":	"struct"
 					}
 				}, {
 					"name":	"function",
 					"type":	{
-						"type_class":	"struct",
-						"record_fields":	[{
-								"name":	"parameters",
-								"type":	{
-									"type_class":	"pointer",
-									"indirection":	2,
-									"base_type":	{
-										"name":	"ocelot_type",
-										"type_class":	"struct"
-									}
-								}
-							}, {
-								"name":	"return_type",
-								"type":	{
-									"type_class":	"pointer",
-									"indirection":	1,
-									"base_type":	{
-										"name":	"ocelot_type",
-										"type_class":	"struct"
-									}
-								}
-							}, {
-								"name":	"variadic",
-								"type":	{
-									"type_class":	"int"
-								}
-							}]
+						"name":	"ocelot_function_type",
+						"type_class":	"struct"
 					}
 				}, {
 					"name":	"record_fields",
@@ -142,6 +112,41 @@
 				"type_class":	"void"
 			},
 			"variadic":	false
+		}
+	}, {
+		"name":	"ocelot_function_type",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	true,
+		"type":	{
+			"name":	"ocelot_function_type",
+			"type_class":	"struct",
+			"record_fields":	[{
+					"name":	"parameters",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	2,
+						"base_type":	{
+							"name":	"ocelot_type",
+							"type_class":	"struct"
+						}
+					}
+				}, {
+					"name":	"return_type",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	1,
+						"base_type":	{
+							"name":	"ocelot_type",
+							"type_class":	"struct"
+						}
+					}
+				}, {
+					"name":	"variadic",
+					"type":	{
+						"type_class":	"int"
+					}
+				}]
 		}
 	}, {
 		"name":	"ocelot_json_parse",
@@ -217,6 +222,31 @@
 				}
 			},
 			"variadic":	false
+		}
+	}, {
+		"name":	"ocelot_pointer_type",
+		"symbol_class":	"type",
+		"linkage":	"private",
+		"elaborated":	true,
+		"type":	{
+			"name":	"ocelot_pointer_type",
+			"type_class":	"struct",
+			"record_fields":	[{
+					"name":	"indirection",
+					"type":	{
+						"type_class":	"int"
+					}
+				}, {
+					"name":	"base_type",
+					"type":	{
+						"type_class":	"pointer",
+						"indirection":	1,
+						"base_type":	{
+							"name":	"ocelot_type",
+							"type_class":	"struct"
+						}
+					}
+				}]
 		}
 	}, {
 		"name":	"ocelot_record_field",
