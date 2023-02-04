@@ -1328,16 +1328,29 @@ ocelot_symbols *ocelot_parse(const char *path, char **include_dirs)
 		int argc, i;
 		char **include;
 		for (argc = 0, include = include_dirs; *include != NULL; argc += 2, include++);
-		const char **argv = NULL;
+		char **argv = NULL;
 		if (argc > 0)
 		{
-			argv = (const char**) malloc(sizeof(char*) * argc);
+			argv = (char**) malloc(sizeof(char*) * argc);
 			if (argv == NULL) goto cleanup;
+			for (i = 0; i < argc; i++)
+			{
+				argv[i] = NULL;
+			}
 		}
 		for (i = 0; i < argc; i += 2)
 		{
-			argv[i] = "-I";
-			argv[i + 1] = include_dirs[i >> 1];
+			char *dir = include_dirs[i >> 1];
+			size_t dirlen = strlen(dir);
+			char *arg = (char*) malloc(dirlen + 3);
+			if (arg == NULL) goto cleanup;
+			argv[i] = ocelot_strdup("-I");
+			if (argv[i] == NULL) goto cleanup;
+			arg[0] = '\"';
+			strcpy(arg + 1, dir);
+			arg[dirlen + 1] = '\"';
+			arg[dirlen + 2] = '\0';
+			argv[i + 1] = arg;
 		}
 		symbols = ocelot_symbols_new();
 		if (symbols == NULL) goto cleanup;
@@ -1348,7 +1361,14 @@ ocelot_symbols *ocelot_parse(const char *path, char **include_dirs)
 		clang_disposeTranslationUnit(tu);
 		clang_disposeIndex(idx);
 cleanup:
-		free(argv);
+		if (argv != NULL)
+		{
+			for (i = 0; i < argc; i++)
+			{
+				free(argv[i]);
+			}
+			free(argv);
+		}
 		free(full_path);
 	}
 	return symbols;
