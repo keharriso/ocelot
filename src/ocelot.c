@@ -1328,10 +1328,10 @@ ocelot_symbols *ocelot_parse(const char *path, char **include_dirs)
 		int argc, i;
 		char **include;
 		for (argc = 0, include = include_dirs; *include != NULL; argc += 2, include++);
-		char **argv = NULL;
+		const char **argv = NULL;
 		if (argc > 0)
 		{
-			argv = (char**) malloc(sizeof(char*) * argc);
+			argv = (const char**) malloc(sizeof(const char*) * argc);
 			if (argv == NULL) goto cleanup;
 			for (i = 0; i < argc; i++)
 			{
@@ -1342,10 +1342,11 @@ ocelot_symbols *ocelot_parse(const char *path, char **include_dirs)
 		{
 			char *dir = include_dirs[i >> 1];
 			size_t dirlen = strlen(dir);
-			char *arg = (char*) malloc(dirlen + 3);
-			if (arg == NULL) goto cleanup;
+			char *arg;
 			argv[i] = ocelot_strdup("-I");
 			if (argv[i] == NULL) goto cleanup;
+			arg = (char*) malloc(dirlen + 3);
+			if (arg == NULL) goto cleanup;
 			arg[0] = '\"';
 			strcpy(arg + 1, dir);
 			arg[dirlen + 1] = '\"';
@@ -1365,7 +1366,7 @@ cleanup:
 		{
 			for (i = 0; i < argc; i++)
 			{
-				free(argv[i]);
+				free((void*) argv[i]);
 			}
 			free(argv);
 		}
