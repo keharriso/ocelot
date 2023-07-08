@@ -94,7 +94,8 @@ static ocelot_type_class ocelot_type_from_clang(enum CXTypeKind type)
 		return OC_TYPE_VOID;
 	case CXType_Char_S:
 	case CXType_SChar:
-		return OC_TYPE_CHAR;
+		return OC_TYPE_SCHAR;
+	case CXType_Char_U:
 	case CXType_UChar:
 		return OC_TYPE_UCHAR;
 	case CXType_Short:
@@ -803,6 +804,10 @@ static char *ocelot_parse_type_name(CXType type, int *elaborated)
 	}
 	CXString cxSpelling = clang_getTypeSpelling(type);
 	const char *cSpelling = clang_getCString(cxSpelling);
+	if (elaborated != NULL)
+	{
+		*elaborated = 1;
+	}
 	if (strstr(cSpelling, "struct ") != NULL)
 	{
 		cSpelling = cSpelling + 7;
@@ -815,9 +820,9 @@ static char *ocelot_parse_type_name(CXType type, int *elaborated)
 	{
 		cSpelling = cSpelling + 5;
 	}
-	if (elaborated)
+	else if (elaborated != NULL)
 	{
-		*elaborated = clang_Type_getNamedType(type).kind != CXType_Invalid;
+		*elaborated = 0;
 	}
 	char *spelling = ocelot_strdup(cSpelling);
 	clang_disposeString(cxSpelling);
@@ -1013,7 +1018,6 @@ static ocelot_type *ocelot_parse_resolve_type(CXType type, ocelot_symbols *symbo
 		symbol = ocelot_parse_symbol_new(OC_SYMBOL_TYPE, cursor);
 		type = clang_Type_getNamedType(type);
 		symbol->type = ocelot_parse_resolve_type(type, symbols);
-		symbol->elaborated = 1;
 		resolved_type = ocelot_type_dup(symbol->type);
 		if (ocelot_symbols_put(symbols, symbol))
 		{
@@ -1265,7 +1269,7 @@ static ocelot_symbol *ocelot_cursor_to_symbol(CXCursor cursor, ocelot_symbols *s
 			if (symbol->type != NULL)
 			{
 				free(symbol->type->name);
-				symbol->type->name = ocelot_parse_type_name(type, &symbol->elaborated);
+				symbol->type->name = ocelot_parse_type_name(type, NULL);
 			}
 		}
 		else if (type.kind == CXType_Typedef)
@@ -1276,7 +1280,7 @@ static ocelot_symbol *ocelot_cursor_to_symbol(CXCursor cursor, ocelot_symbols *s
 			if (symbol != NULL)
 			{
 				free(symbol->type->name);
-				symbol->type->name = ocelot_parse_type_name(type, &symbol->elaborated);
+				symbol->type->name = ocelot_parse_type_name(type, NULL);
 			}
 		}
 		else
@@ -1287,7 +1291,7 @@ static ocelot_symbol *ocelot_cursor_to_symbol(CXCursor cursor, ocelot_symbols *s
 			if (symbol->type != NULL)
 			{
 				free(symbol->type->name);
-				symbol->type->name = ocelot_parse_type_name(type, &symbol->elaborated);
+				symbol->type->name = ocelot_parse_type_name(type, NULL);
 			}
 		}
 		break;
@@ -1521,8 +1525,8 @@ static const char *ocelot_json_serialize_type_class(ocelot_type_class type_class
 		return "pointer";
 	case OC_TYPE_ARRAY:
 		return "array";
-	case OC_TYPE_CHAR:
-		return "char";
+	case OC_TYPE_SCHAR:
+		return "signed char";
 	case OC_TYPE_UCHAR:
 		return "unsigned char";
 	case OC_TYPE_SHORT:
@@ -1742,9 +1746,9 @@ static ocelot_type_class ocelot_json_parse_type_class(const char *type_class)
 	{
 		return OC_TYPE_ARRAY;
 	}
-	else if (!strcmp(type_class, "char"))
+	else if (!strcmp(type_class, "signed char"))
 	{
-		return OC_TYPE_CHAR;
+		return OC_TYPE_SCHAR;
 	}
 	else if (!strcmp(type_class, "unsigned char"))
 	{
